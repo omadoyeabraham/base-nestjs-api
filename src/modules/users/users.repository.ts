@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ModelClass } from 'objection';
 
-import { UserModel } from '../database/models/user.model';
-import { CreateUserDTO } from './DTOs/create-user.dto';
+import { UserModel } from '@modules/database';
+import { CreateUserDTO } from '@modules/users';
 
 @Injectable()
 export class UsersRepository {

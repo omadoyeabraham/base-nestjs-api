@@ -4,9 +4,9 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 import appConfig from './config/';
 import { AppController } from './app.controller';
-import { AuthModule } from './modules/auth/auth.module';
-import { UsersModule } from './modules/users/users.module';
-import { DatabaseModule } from './modules/database/database.module';
+import { AuthModule } from '@modules/auth';
+import { UsersModule } from '@modules/users';
+import { DatabaseModule } from '@modules/database';
 
 /**
  * The root module for the entire API.

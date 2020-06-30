@@ -5,4 +5,14 @@ export class RoleModel extends BaseModel {
 
   // MODEL COLUMNS
   name: string;
+
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      required: ['name'],
+      properties: {
+        name: { type: 'string' },
+      },
+    };
+  }
 }

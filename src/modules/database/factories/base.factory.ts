@@ -1,12 +1,28 @@
-import { BaseModel } from '@modules/database';
+import { Model } from 'objection';
 
-export class BaseModelFactory {
+import { BaseModel } from '../models/base.model';
+
+export abstract class BaseModelFactory {
+  ModelClass = BaseModel;
+
+  /**
+   * Function used to return the data fields in a single model.
+   * It must be implemented by an class extending this one.
+   */
   static modelFields() {
     return {};
   }
 
-  static ModelClass = BaseModel;
+  static modelClass() {
+    return Model;
+  }
 
+  /**
+   * Make  model record(s) (but don't save into the database)
+   *
+   * @param numberOfRecords
+   * @param overrideFields
+   */
   static make(numberOfRecords = 1, overrideFields = {}) {
     if (numberOfRecords == 1) {
       return {
@@ -26,6 +42,12 @@ export class BaseModelFactory {
     }
   }
 
+  /**
+   * Create model records in the database.
+   *
+   * @param numberOfRecords
+   * @param overrideFields
+   */
   static create(numberOfRecords = 1, overrideFields = {}) {
     const records = [];
 
@@ -36,6 +58,8 @@ export class BaseModelFactory {
       });
     }
 
-    return this.ModelClass.query().insert(records);
+    return this.modelClass()
+      .query()
+      .insert(records);
   }
 }

@@ -1,4 +1,5 @@
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+
 import { Match } from '@modules/shared/match.decorator';
 
 /**

@@ -1,10 +1,18 @@
-import { UserModel } from '../models/user.model';
 import faker from 'faker';
+
 import { BaseModelFactory } from './base.factory';
+import { UserModel } from '../models/user.model';
 
 export class UserModelFactory extends BaseModelFactory {
-  static ModelClass = UserModel;
+  ModelClass = UserModel;
 
+  static modelClass() {
+    return UserModel;
+  }
+
+  /**
+   * The data fields for this model
+   */
   static modelFields() {
     return {
       first_name: faker.name.firstName(),

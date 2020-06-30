@@ -1,4 +1,5 @@
 import * as Knex from 'knex';
+
 import { UserModel } from '../models/user.model';
 import { UserModelFactory } from '../factories/users.factory';
 

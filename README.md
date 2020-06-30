@@ -1,4 +1,4 @@
-API for the five things app
+# NEST.JS BASED API
 
 Required features
 
@@ -20,14 +20,15 @@ This repository is built by [omadoye abraham](http://omadoyeabraham.com) to serv
 ---
 
 - [Nest.js](https://nestjs.com/) Node.js framework
-- [TypeOrm](https://typeorm.io/) as the ORM.
+- [Objection](https://vincit.github.io/objection.js/) as the ORM.
 - Postgresql for the database
 - Redis for caching
 - [Passport-local](http://www.passportjs.org/packages/passport-local/) and [Passport-jwt](http://www.passportjs.org/packages/passport-jwt/) for authentication
 - [Helmet](https://helmetjs.github.io/) for security HTTP headers.
 - [class-validator](https://github.com/typestack/class-validator) for validation
 - winston for logging
-- knex.js for database migration and seeding
+- [Knex.js](https://knexjs.org/) for database migration and seeding
+- [CASL](https://stalniy.github.io/casl/v4/en/) for role based access control
 
 ## BASE FUNCTIONALITY
 

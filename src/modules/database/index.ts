@@ -5,6 +5,7 @@
 /**
  * DATABASE MODULE
  */
+
 export * from '@modules/database/database.module';
 export * from '@modules/database/models/base.model';
 export * from '@modules/database/models/role.model';

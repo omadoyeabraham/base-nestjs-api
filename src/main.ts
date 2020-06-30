@@ -8,6 +8,14 @@ import expressListRoutes from 'express-list-routes';
 
 import { AppModule } from './app.module';
 
+import * as path from 'path';
+import * as moduleAlias from 'module-alias';
+
+moduleAlias.addAliases({
+  '@src': path.resolve(__dirname),
+  '@modules': path.resolve(__dirname, 'modules'),
+});
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);

@@ -19,13 +19,14 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "knex": "knex --knexfile ./src/modules/database/knexfile.ts",
+    "knex": "node -r tsconfig-paths/register -r ts-node/register node_modules/.bin/knex --knexfile ./src/modules/database/knexfile.ts",
     "migrate": "npm run knex migrate:latest",
     "migrate:make": "npm run knex migrate:make -- -x ts",
     "seed": "npm run knex seed:run",
     "seed:make": "npm run knex seed:make -- -x ts"
   },
   "dependencies": {
+    "@casl/ability": "^4.1.4",
     "@nestjs/common": "^7.0.0",
     "@nestjs/config": "^0.5.0",
     "@nestjs/core": "^7.0.0",
@@ -97,7 +98,8 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
-      "^@app/(.*)$": "<rootDir>/../src/$1"
+      "^@app/(.*)$": "<rootDir>/../src/$1",
+      "^@modules/(.*)$": "<rootDir>/../src/modules/$1"
     }
   }
 }

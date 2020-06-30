@@ -3,12 +3,18 @@ import Knex from 'knex';
 import { knexSnakeCaseMappers, Model } from 'objection';
 import { ConfigService, ConfigModule } from '@nestjs/config';
 
-import { UserModel } from '@modules/database/models/user.model';
-import { RoleModel } from '@modules/database/models/role.model';
-import { KNEX_CONNECTION } from '@src/costants';
+import { KNEX_CONNECTION } from '@src/constants';
+import { UserModel } from './models/user.model';
+import { RoleModel } from './models/role.model';
 
+/**
+ * List of Models used in the application
+ */
 const models = [UserModel, RoleModel];
 
+/**
+ * Map each model to an object used to provide it to Nest's dependency injection container.
+ */
 const modelProviders = models.map(model => {
   return {
     provide: model.name,
@@ -18,6 +24,8 @@ const modelProviders = models.map(model => {
 
 const providers = [
   ...modelProviders,
+
+  // Setup Knex to be provided by the database module
   {
     inject: [ConfigService],
     provide: KNEX_CONNECTION,
@@ -31,7 +39,7 @@ const providers = [
         client = 'sqlite3';
         useNullAsDefault = true;
         connection = {
-          filename: './mydb.sqlite',
+          filename: './test.db',
         };
       } else {
         {
@@ -52,7 +60,9 @@ const providers = [
         ...knexSnakeCaseMappers(),
       });
 
+      // Give the created knex instance to Objection.js
       Model.knex(knex);
+
       return knex;
     },
   },

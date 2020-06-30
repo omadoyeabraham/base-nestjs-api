@@ -1,11 +1,10 @@
 import { Model } from 'objection';
 import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';
-import * as lodash from 'lodash';
 
+import { SALT_ROUNDS } from '@src/constants';
 import { BaseModel } from './base.model';
 import { RoleModel } from './role.model';
-import { SALT_ROUNDS } from '../../../costants';
 
 export class UserModel extends BaseModel {
   static tableName = 'users';
@@ -20,28 +19,28 @@ export class UserModel extends BaseModel {
     this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
   }
 
+  /**
+   * Secure fields which should not be exposed when returning user instances
+   */
   get $secureFields(): string[] {
     return ['password'];
   }
 
-  // omit stuff when creating json response from model
-  $formatJson(json) {
-    json = super.$formatJson(json);
-    return lodash.omit(json, this.$secureFields);
-  }
-
   // MODEL COLUMNS
-  id: number;
-  uuid: string;
+  id!: number;
+  uuid!: string;
   first_name: string;
   last_name: string;
-  username: string;
-  email: string;
+  username!: string;
+  email!: string;
   password: string;
 
   // RELATIONSHIPS
-  roles: RoleModel[];
+  roles!: RoleModel[];
 
+  /**
+   * Define relationships
+   */
   static get relationMappings() {
     const RoleModel = require('./role.model').RoleModel;
 
@@ -57,6 +56,25 @@ export class UserModel extends BaseModel {
           },
           to: 'roles.id',
         },
+      },
+    };
+  }
+
+  /**
+   * Used for input validation whenever a model instance is created explicitly or implicitly
+   */
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      required: ['email', 'password', 'username'],
+      properties: {
+        id: { type: 'integer' },
+        uuid: { type: 'uuid' },
+        first_name: { type: 'string', minLength: 1, maxLength: 255 },
+        last_name: { type: 'string', minLength: 1, maxLength: 255 },
+        username: { type: 'string', minLength: 1, maxLength: 255 },
+        email: { type: 'email', minLength: 1, maxLength: 255 },
+        password: { type: 'email', minLength: 6, maxLength: 255 },
       },
     };
   }

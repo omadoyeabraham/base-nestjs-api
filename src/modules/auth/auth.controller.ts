@@ -7,11 +7,11 @@ import {
   Body,
 } from '@nestjs/common';
 
+import { CreateUserDTO } from '@modules/users';
+import { UserModel } from '@modules/database';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { AuthService } from './auth.service';
-import { CreateUserDTO } from '../users/DTOs/create-user.dto';
-import { UserModel } from '../database/models/user.model';
 
 @Controller('auth')
 export class AuthController {

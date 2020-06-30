@@ -11,7 +11,9 @@ NEEDS
 
 - Google app created on developer console to use OAUTH
 
-# OVERVIEW
+## OVERVIEW
+
+---
 
 This repository is built by [omadoye abraham](http://omadoyeabraham.com) to serve as good starting point for building APIs using Node.js and the [Nest.js](https://nestjs.com/) framework.
 
@@ -57,6 +59,7 @@ The repository has the following functionality already implemented:
 
 - [ ] Database
   - [x] Migrations
+  - [x] Seeds
   - [ ] Env switching during testing
 
 ## CONFIGURING THE PROJECT
